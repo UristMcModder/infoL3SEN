@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <style>
+	    body{
+	      text-align: center;
+	    }
+	    div{
+	      width: 75%;
+	      height: auto;
+	      background-color: white;
+	      border: 1px solid black;
+	    }
+	    svg{
+	      width: 100%;
+	      height: auto;
+	    }
+	  </style>
+	  <meta charset="utf-8" />
+	  <title>Rectangles aléatoires</title>
+	  <script language="javascript">
+	    var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+	    var svgNS = svg.namespaceURI;
+	    svg.setAttribute("width",1000);
+	    svg.setAttribute("height",1000);
+	    
+      function genererSVG(){
+        while(svg.lastChild){
+          svg.removeChild(svg.lastChild);
+        }
+
+	      for(var i=0;i<(parseInt(document.f.nb.value)||0);i++){
+	        var rect = document.createElementNS(svgNS,"rect");
+	        
+	        var width = Math.floor(1+Math.random()*1000);
+	        var x = Math.floor(1+Math.random()*(1000-width));
+	        var height = Math.floor(1+Math.random()*1000);
+	        var y = Math.floor(1+Math.random()*(1000-height));
+	        var fill = "rgb(" + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + ")";
+	        var opacity = Math.random();
+	        
+	        rect.setAttribute("x",x);
+	        rect.setAttribute("y",y);
+	        rect.setAttribute("width",width);
+	        rect.setAttribute("height",height);
+	        rect.setAttribute("fill",fill);
+	        rect.setAttribute("opacity",opacity);
+	        
+	        svg.appendChild(rect);      
+	      }
+	      document.getElementById("desRectangles").appendChild(svg);
+      }
+	  </script>
+  </head>
+	<body align="center" bgcolor="grey">
+	  <h1>Génération de rectangles aléatoires à l'aide du SVG</h1>
+	  <center><div id="desRectangles" height=100%></div></center>
+	  <form name="f">
+	    Nombre de rectangles : 
+	    <input name="nb" type="text" value="50"/>
+	    <br/>
+	    <button type="button" onclick="genererSVG()">C'est parti !"</button>
+	  </form>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
