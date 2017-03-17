@@ -4,15 +4,29 @@
 		<meta charset='utf8'/>
 		<title>Morpion</title>
 		<script language='javascript'>
+			// V A R I A B L E S   G L O B A L E S
+
+			// Le premier joueur a-t-il été choisi ?
 			var premierJoueurChoisi = false;
+			// Est-ce le tour de la croix ? true -> oui, false -> non
 			var tourCroix = true;
+			// La partie est-elle finie ?
 			var unJoueurAGagne = false;
-			// Tableau représentant le plateau de jeu
+			// Tableau modélisant le plateau de jeu
+			// Légende : 0 = rien, 1 = croix, 2 = rond
 			var p = [[0,0,0],
 						[0,0,0],
 						[0,0,0]];
-			// Légende : 0 = rien, 1 = croix, 2 = rond
 
+			// F O N C T I O N S
+
+			// Fonction qui (ré)initialise tout le jeu : 
+			//   Toutes les images sont remplacées par des cases vides
+			//   Toutes les cases du tableau "plateau" sont remplacées par des 0
+			//   On remet le sélecteur sur le premier "cran"
+			//   On redonne les valeurs de départ aux variables globales : 
+			//   personne n'a gagné et le premier joueur n'est pas choisi
+			// Appelée par le bouton Refaire une partie et au chargement de la page
 			function initialiser(){
 				for(var i=0;i<3;i++){
 					for(var j=0;j<3;j++){
@@ -25,27 +39,43 @@
 				unJoueurAGagne = false
 			}
 
+			// Fonction qui gère le choix du premier Joueur 
+			// On utilise la variable premierJoueurChoisi pour faire en sorte que
+			// cette fonction ne soit appelée qu'une seule fois.
+			// Si le cran choisi est celui de la croix, on met tourCroix à vrai, 
+			// sinon on lui donne la valeur faux. Dans ces deux cas on passe la
+			// valeur de premierJoueurChoisi à true.
+			// Si le cran choisi est celui du haut, il ne se passe rien.
 			function choixPremier(){
 				if(!premierJoueurChoisi){
-					premierJoueurChoisi = !premierJoueurChoisi;
 					switch(document.formulaire.premier.selectedIndex){
 						case 1:
 							tourCroix = true;
+							premierJoueurChoisi = !premierJoueurChoisi;
 							break;
 						case 2:
 							tourCroix = false;
-							break;
-						case 0:
-							premierJoueurChoisi = false;
+							premierJoueurChoisi = !premierJoueurChoisi;
 							break;
 					}
 				}
 			}
 
+			// La fonction principale du programme
+			// Appelée lorsque l'on clique sur une case.
+			// Arguments : i et j, les coordonnées de la case sur laquelle on a 
+			// cliqué, donnés lors de l'appel. (commencent à 0 en haut à gauche)
 			function jouer(i, j){
+				//si le premier joueur a été choisi et personne n'a gagné
 				if(premierJoueurChoisi && !unJoueurAGagne){
+					//on se donne l'objet image pour raccourcir les lignes suivantes
 					var image = document.images['im'+i+j];
+					//si la case est vide, on peut jouer dessus
 					if(p[i][j]==0){
+						// On change la case du plateau sur laquelle on a cliquée : 
+						// - on change l'image source (le visuel)
+						// - on change la valeur de la case du tableau (interne au 
+						// programme)
 						if(tourCroix){
 							image.src = 'Im1.jpg';
 							p[i][j] = 1
@@ -53,45 +83,60 @@
 							image.src = 'Im2.jpg';
 							p[i][j] = 2
 						}
+						//on vérifie si le joueur a gagné
 						verifier(i,j);
+						// C'est au tour de l'autre joueur :
+						// l'opérateur négation ! renvoie l'inverse du booléen auquel
+						// il est appliqué : !true = false 
 						tourCroix = !tourCroix
 					}
 				}
 			}
 
+			// Fonction qui vérifie si quelqu'un a gagné
+			// Appelée par la fonction jouer
+			// Arguments : les coordonnées de la case sur laquelle le joueur a 
+			// cliqué : on n'a besoin de vérifier que les lignes qui sont 
+			// affectées par la modification de cette case : exemple
+			// o o x   si on a cliqué sur x
+			//   o o   on n'a a vérifier que trois lignes : les o
+			// o   o
 			function verifier(i, j){
+				// On définit la bonne image de victoire selon le joueur qui a joué
 				var imageGagnant;
 				if(tourCroix){
 					imageGagnant = 'Im11.jpg'
 				}else{
 					imageGagnant = 'Im21.jpg'
 				}
+				// Puis on vérifie les lignes affectées par la case jouée
+				// et on remplace les images par des images rouges
 				// Colonne 
-				if(p[0][j]==p[1][j]&&p[1][j]==p[2][j]){
+				if(p[0][j]==p[1][j] && p[1][j]==p[2][j]){
 					unJoueurAGagne = true;
 					for(var k=0;k<3;k++){
 						document.images['im'+k+j].src = imageGagnant
 					}
 				}
 				// Ligne 
-				if(p[i][0]==p[i][1]&&p[i][1]==p[i][2]){
+				if(p[i][0]==p[i][1] && p[i][1]==p[i][2]){
 					unJoueurAGagne = true;
 					for(var k=0;k<3;k++){
 						document.images['im'+i+k].src = imageGagnant
 					}
 				}
 				// Diagonales
+				// si la dernière case jouée est sur la diagonale /
 				if(i+j==2){
-				// si la dernière case jouée est sur la diagonale : /
-					if(p[0][2]==p[1][1]&&p[0][2]==p[2][0]){
+					if(p[0][2]==p[1][1] && p[0][2]==p[2][0]){
 						unJoueurAGagne = true;
 						for(var k=0;k<3;k++){
 							document.images['im'+k+(2-k)].src = imageGagnant
 						}
 					}
 				}
+				// si la dernière case jouée est sur la diagonale \
 				if(i==j){
-				// si la dernière case jouée est sur la diagonale : \
 					if (p[0][0]==p[1][1]&&p[1][1]==p[2][2]){
 						unJoueurAGagne = true;
 						for(var k=0;k<3;k++){
@@ -102,10 +147,14 @@
 			}
 		</script>
 	</head>
+	<!-- Au chargement de la page on appelle la fonction initialiser()
+	qui permet de définir les sources des images et tout le bordel. -->
 	<body bgcolor='chocolate' onLoad='initialiser()'>
 		<center>
 		<h1>Jeu du morpion</h1>
 		<table>
+			<!-- Intéressant : les noms et les appels de la fonction jouer()
+			sont fonction de la position de l'image dans la grille -->
 			<tr>
 				<td><img name='im00' onclick='jouer(0,0)'/></td>
 				<td><img name='im01' onclick='jouer(0,1)'/></td>
