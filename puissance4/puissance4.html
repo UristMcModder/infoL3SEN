@@ -61,12 +61,62 @@
 			}
 
 			function verifierNul(){
-				for(var i=0;i<3;i++){
-					for(var j=0;j<4;j++){
-						if(t[i][j]==t[i+1][j] &&
-						   t[i+1][j]==t[i+2][j] &&
-						   t[i+2][j]==t[i+3][j]){
-							
+				for(var i=0;i<6;i++){
+					for(var j=0;j<7;j++){
+						if(t[i][j]!=0){
+							// x ou o
+							// x    o
+							// x    o
+							// x    o
+							if(i<3 &&
+							   t[i][j]==t[i+1][j] &&
+							   t[i+1][j]==t[i+2][j] &&
+							   t[i+2][j]==t[i+3][j]){
+							   	for(var k=0;k<4;k++){
+									document.images["cell"+(i+k)+j].src = "Im"+t[i][j]+"1.jpg";
+								}
+								unJoueurAGagne = true
+							}
+							// x x x x
+							// ou
+							// o o o o
+							if(j<4 &&
+							   t[i][j]==t[i][j+1] &&
+							   t[i][j+1]==t[i][j+2] &&
+							   t[i][j+2]==t[i][j+3]){
+								for(var k=0;k<4;k++){
+									document.images["cell"+i+(j+k)].src = "Im"+t[i][j]+"1.jpg";
+								}
+								unJoueurAGagne = true
+							}
+							// x  ou  o
+							//   x      o
+							//     x      o
+							//       x      o
+							if(i<3 && j<4 &&
+							   t[i][j]==t[i+1][j+1] &&
+							   t[i+1][j+1]==t[i+2][j+2] &&
+							   t[i+2][j+2]==t[i+3][j+3]){
+								for(var k=0;k<4;k++){
+									document.images["cell"+(i+k)+(j+k)].src = "Im"+t[i][j]+"1.jpg";
+								}
+								unJoueurAGagne = true
+							}
+						}
+						if(t[i][j+3]!=0){
+							//       x  ou  o
+							//     x      o
+							//   x      o
+							// x      o
+							if(i<3 && j<4 &&
+							   t[i][j+3]==t[i+1][j+2] &&
+							   t[i+1][j+2]==t[i+2][j+1] &&
+							   t[i+2][j+1]==t[i+3][j]){
+								for(var k=0;k<4;k++){
+									document.images["cell"+(i+k)+(j+3-k)].src = "Im"+t[i][j+3]+"1.jpg";
+								}
+								unJoueurAGagne = true
+							}
 						}
 					}
 				}
@@ -77,7 +127,7 @@
 		<center>
 		<h1>4 pions alignés, c'est gagné !</h1>
 		<!-- "cell**"
-		     00 01 02 03 04 05 06 xy
+		     00 01 02 03 04 05 06 xy ij
 			 10 11 12 13 14 15 16
 			 20 21 22 23 24 25 26
 			 30 31 32 33 34 35 36
