@@ -1,28 +1,54 @@
+/* 
+Feuille de style CSS
+Syntaxe de base : 
+
+élément HTML{
+	option: valeur;
+}
+
+Les options et leurs valeurs possibles sont trouvables en ligne sur le site 
+https://w3schools.com/
+Tapez juste le nom de la balise que vous voulez modifier + css + w3 sur google
+*/
+
+
+/* Le style du body s'applique à tout ce qui est à l'intérieur des balises 
+   <html></html>, sauf si on précise le contraire */
 body{
+	/* couleur du fond */
 	background-color: black;
+	/* couleur du texte */
 	color: white;
 	text-align: center;
 }
 
 h1{
+	/* Police de caractère */
 	font-family: "Courier New";
 	font-style: normal;
 	font-weight: bold;
 }
 
 table{
+	/* La table prend 90% de la largeur de l'écran, au centre */
 	width: 90%;
 	margin-left: 5%;
 	margin-right: 5%;
+	/* Elle n'a pas de bordure */
 	border-collapse: collapse;
+	/* Il y a un espace de 15 pixels entre les bordures et ce qu'on met à 
+	l'intérieur des cases */ 
 	padding: 15px;
 }
 
+/* Chais pas si c'est nécessaire mébon */
 td{
 	padding: 15px;
 }
 
+/* Style qui s'applique à tous les éléments de classe ligne */
 .ligne{
+	/* on leur met une bordure blanche d'un pixel sur le dessous */
 	border-bottom: 1px solid white;
 }
 
@@ -33,6 +59,8 @@ input[type=text]{
 	text-align: center;
 }
 
+/* Les input type="text" de classe retenue et resultat n'ont pas de bordure
+pour que l'utilisateur n'aie pas envie d'écrire dedans */ 
 input[type=text].retenue, input[type=text].resultat{
 	border: 0px;
 }
