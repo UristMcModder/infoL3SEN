@@ -1,0 +1,153 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>PUISSANCE 4</title>
+		<script language="javascript">
+			var premierJoueurChoisi = false;
+			var unJoueurAGagne = false;
+			var tourCroix;
+			var t = [[0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0]];
+			
+			function initialiser(){
+				premierJoueurChoisi = false;
+				unJoueurAGagne = false;
+				t = [[0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0],
+			         [0,0,0,0,0,0,0]];
+			  for(var i=0;i<6;i++){
+			  	for(var j=0;j<7;j++){
+			  		document.images["cell"+i+j].src="Im0.jpg"
+			  	}
+			  }
+			}
+			
+			function premier(selecteur){
+				var i = selecteur.selectedIndex;
+				if(!premierJoueurChoisi && i!=0){
+					if(i==1){
+						tourCroix = true
+					}else{
+						tourCroix = false
+					}
+					premierJoueurChoisi = true
+				}
+			}
+			
+			function jouer(caseCliquee){
+				var y = caseCliquee.name[5];
+				if(!unJoueurAGagne && premierJoueurChoisi && t[0][y]==0){
+					var x = 0;
+					while(x<6 && t[x][y]==0){
+						x++
+					}
+					if(tourCroix){
+						document.images["cell"+(x-1)+y].src = "Im1.jpg";
+						t[x-1][y] = 1
+					}else{
+						document.images["cell"+(x-1)+y].src = "Im2.jpg";
+						t[x-1][y] = 2
+					}
+					verifierNul();
+					tourCroix = !tourCroix
+				}
+			}
+
+			function verifierNul(){
+				for(var i=0;i<3;i++){
+					for(var j=0;j<4;j++){
+						if(t[i][j]==t[i+1][j] &&
+						   t[i+1][j]==t[i+2][j] &&
+						   t[i+2][j]==t[i+3][j]){
+							
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body onload="initialiser()" bgcolor="grey">
+		<center>
+		<h1>4 pions alignés, c'est gagné !</h1>
+		<!-- "cell**"
+		     00 01 02 03 04 05 06 xy
+			 10 11 12 13 14 15 16
+			 20 21 22 23 24 25 26
+			 30 31 32 33 34 35 36
+			 40 41 42 43 44 45 46
+			 50 51 52 53 54 55 56 -->
+		<table>
+			<tr>
+				<td><img name="cell00" onclick="jouer(this)"/></td>
+				<td><img name="cell01" onclick="jouer(this)"/></td>
+				<td><img name="cell02" onclick="jouer(this)"/></td>
+				<td><img name="cell03" onclick="jouer(this)"/></td>
+				<td><img name="cell04" onclick="jouer(this)"/></td>
+				<td><img name="cell05" onclick="jouer(this)"/></td>
+				<td><img name="cell06" onclick="jouer(this)"/></td>
+			</tr>
+			<tr>
+				<td><img name="cell10" onclick="jouer(this)"/></td>
+				<td><img name="cell11" onclick="jouer(this)"/></td>
+				<td><img name="cell12" onclick="jouer(this)"/></td>
+				<td><img name="cell13" onclick="jouer(this)"/></td>
+				<td><img name="cell14" onclick="jouer(this)"/></td>
+				<td><img name="cell15" onclick="jouer(this)"/></td>
+				<td><img name="cell16" onclick="jouer(this)"/></td>
+			</tr>
+			<tr>
+				<td><img name="cell20" onclick="jouer(this)"/></td>
+				<td><img name="cell21" onclick="jouer(this)"/></td>
+				<td><img name="cell22" onclick="jouer(this)"/></td>
+				<td><img name="cell23" onclick="jouer(this)"/></td>
+				<td><img name="cell24" onclick="jouer(this)"/></td>
+				<td><img name="cell25" onclick="jouer(this)"/></td>
+				<td><img name="cell26" onclick="jouer(this)"/></td>
+			</tr>
+			<tr>
+				<td><img name="cell30" onclick="jouer(this)"/></td>
+				<td><img name="cell31" onclick="jouer(this)"/></td>
+				<td><img name="cell32" onclick="jouer(this)"/></td>
+				<td><img name="cell33" onclick="jouer(this)"/></td>
+				<td><img name="cell34" onclick="jouer(this)"/></td>
+				<td><img name="cell35" onclick="jouer(this)"/></td>
+				<td><img name="cell36" onclick="jouer(this)"/></td>
+			</tr>
+			<tr>
+				<td><img name="cell40" onclick="jouer(this)"/></td>
+				<td><img name="cell41" onclick="jouer(this)"/></td>
+				<td><img name="cell42" onclick="jouer(this)"/></td>
+				<td><img name="cell43" onclick="jouer(this)"/></td>
+				<td><img name="cell44" onclick="jouer(this)"/></td>
+				<td><img name="cell45" onclick="jouer(this)"/></td>
+				<td><img name="cell46" onclick="jouer(this)"/></td>
+			</tr>
+			<tr>
+				<td><img name="cell50" onclick="jouer(this)"/></td>
+				<td><img name="cell51" onclick="jouer(this)"/></td>
+				<td><img name="cell52" onclick="jouer(this)"/></td>
+				<td><img name="cell53" onclick="jouer(this)"/></td>
+				<td><img name="cell54" onclick="jouer(this)"/></td>
+				<td><img name="cell55" onclick="jouer(this)"/></td>
+				<td><img name="cell56" onclick="jouer(this)"/></td>
+			</tr>
+		</table>
+		</center>
+		<form name="fo">
+			<select onchange="premier(this)">
+				<option selected>Choisir le premier joueur</option>
+				<option>Joueur 1 - X</option>
+				<option>Joueur 2 - O</option>
+			</select>
+			<br>
+			<center><input type="reset" onclick="initialiser()" value="Réinitialiser"></center>
+		</form>
+	</body>
+</html>

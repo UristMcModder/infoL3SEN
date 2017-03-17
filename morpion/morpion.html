@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf8'/>
+		<title>Morpion</title>
+		<script language='javascript'>
+			var premierJoueurChoisi = false;
+			var tourCroix = true;
+			var unJoueurAGagne = false;
+			// Tableau représentant le plateau de jeu
+			var p = [[0,0,0],
+						[0,0,0],
+						[0,0,0]];
+			// Légende : 0 = rien, 1 = croix, 2 = rond
+
+			function initialiser(){
+				for(var i=0;i<3;i++){
+					for(var j=0;j<3;j++){
+						document.images['im'+i+j].src = 'Im0.jpg';
+						p[i][j] = 0
+					}
+				}
+				document.formulaire.premier.selectedIndex = 0;
+				premierJoueurChoisi = false;
+				unJoueurAGagne = false
+			}
+
+			function choixPremier(){
+				if(!premierJoueurChoisi){
+					premierJoueurChoisi = !premierJoueurChoisi;
+					switch(document.formulaire.premier.selectedIndex){
+						case 1:
+							tourCroix = true;
+							break;
+						case 2:
+							tourCroix = false;
+							break;
+						case 0:
+							premierJoueurChoisi = false;
+							break;
+					}
+				}
+			}
+
+			function jouer(i, j){
+				if(premierJoueurChoisi && !unJoueurAGagne){
+					var image = document.images['im'+i+j];
+					if(p[i][j]==0){
+						if(tourCroix){
+							image.src = 'Im1.jpg';
+							p[i][j] = 1
+						}else{
+							image.src = 'Im2.jpg';
+							p[i][j] = 2
+						}
+						verifier(i,j);
+						tourCroix = !tourCroix
+					}
+				}
+			}
+
+			function verifier(i, j){
+				var imageGagnant;
+				if(tourCroix){
+					imageGagnant = 'Im11.jpg'
+				}else{
+					imageGagnant = 'Im21.jpg'
+				}
+				// Colonne 
+				if(p[0][j]==p[1][j]&&p[1][j]==p[2][j]){
+					unJoueurAGagne = true;
+					for(var k=0;k<3;k++){
+						document.images['im'+k+j].src = imageGagnant
+					}
+				}
+				// Ligne 
+				if(p[i][0]==p[i][1]&&p[i][1]==p[i][2]){
+					unJoueurAGagne = true;
+					for(var k=0;k<3;k++){
+						document.images['im'+i+k].src = imageGagnant
+					}
+				}
+				// Diagonales
+				if(i+j==2){
+				// si la dernière case jouée est sur la diagonale : /
+					if(p[0][2]==p[1][1]&&p[0][2]==p[2][0]){
+						unJoueurAGagne = true;
+						for(var k=0;k<3;k++){
+							document.images['im'+k+(2-k)].src = imageGagnant
+						}
+					}
+				}
+				if(i==j){
+				// si la dernière case jouée est sur la diagonale : \
+					if (p[0][0]==p[1][1]&&p[1][1]==p[2][2]){
+						unJoueurAGagne = true;
+						for(var k=0;k<3;k++){
+							document.images['im'+k+k].src = imageGagnant
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body bgcolor='chocolate' onLoad='initialiser()'>
+		<center>
+		<h1>Jeu du morpion</h1>
+		<table>
+			<tr>
+				<td><img name='im00' onclick='jouer(0,0)'/></td>
+				<td><img name='im01' onclick='jouer(0,1)'/></td>
+				<td><img name='im02' onclick='jouer(0,2)'/></td>
+			</tr>
+			<tr>
+				<td><img name='im10' onclick='jouer(1,0)'/></td>
+				<td><img name='im11' onclick='jouer(1,1)'/></td>
+				<td><img name='im12' onclick='jouer(1,2)'/></td>
+			</tr>
+			<tr>
+				<td><img name='im20' onclick='jouer(2,0)'/></td>
+				<td><img name='im21' onclick='jouer(2,1)'/></td>
+				<td><img name='im22' onclick='jouer(2,2)'/></td>
+			</tr>
+		</table>
+		</center>
+		<form name='formulaire'>
+			Qui joue en premier ? <br/>
+			<select name='premier' onchange='choixPremier()'>
+				<option selected>Choisir le joueur qui commence</option>
+				<option>Joueur 1 X</option>
+				<option>Joueur 2 O</option>
+			</select><br/>
+			<center>
+				<input type='button' value='Refaire une partie' onclick='initialiser()'/>
+			</center>
+		</form>
+	</body>
+</html>

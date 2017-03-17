@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf8'/>
+		<title>Cadavre Exquis</title>
+		<script language='javascript'>
+			function estRempli(t){
+				var rempli = true;
+				for(var i=0;i<3;i++){
+					for(var j=0;j<3;j++){
+						rempli = rempli && t[i][j]!=''
+					}
+				}
+				return rempli
+			}
+
+			function random0_2(){
+				return(Math.floor(Math.random()*3))
+			}
+
+			function genereTableau(){
+				var g = document.generateur;
+				var tableau = [[g.s1.value,g.s2.value,g.s3.value],
+									[g.a1.value,g.a2.value,g.a3.value],
+									[g.v1.value,g.v2.value,g.v3.value]];
+				return tableau
+			}
+
+			function simple(){
+				t = genereTableau();
+				if(estRempli(t)){
+					var phrase = '';
+					for(var k=0;k<5;k++){
+						phrase += t[k%3][random0_2()] + ' '
+					}
+					nouvellePhrase(phrase)
+				}
+			}
+
+			function complexe(){
+				t = genereTableau();
+				if(estRempli(t)){
+					var phrase = '';
+					for(var k=0;k<8;k++){
+						phrase += t[k%3][random0_2()]
+						switch(k){
+							case 1:
+								phrase += ', qui ';
+								break;
+							case 4:
+								phrase += ', ';
+								break;
+							default:
+								phrase += ' ';
+								break;
+						}
+					}
+					nouvellePhrase(phrase)
+				}
+			}
+
+			function nouvellePhrase(p){
+				for(var k=0;k<4;k++){
+					document.getElementById('resultat'+(5-k)).innerHTML = document.getElementById('resultat'+(4-k)).innerHTML
+				}
+				document.getElementById('resultat1').innerHTML = p
+			}
+		</script>
+	</head>
+	<body bgcolor='grey'>
+		<center>
+		<h1>Cadavres Exquis V1</h1>
+		<form name='generateur'>
+			<table>
+				<tr>
+					<td><input type='button' value='engendrer phrase simple' onclick='simple()'/></td>
+					<td><input type='button' value='engendrer phrase complexe' onclick='complexe()'/></td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			Sujets (masculin singulier avec un article) : 
+			<br/>
+			<table>
+				<tr>
+					<td><input type='text' name='s1'/></td>
+					<td><input type='text' name='s2'/></td>
+					<td><input type='text' name='s3'/></td>
+				</tr>
+			</table>
+			<br/>
+			Adjectifs (masculin singulier) : 
+			<br/>
+			<table>
+				<tr>
+					<td><input type='text' name='a1'/></td>
+					<td><input type='text' name='a2'/></td>
+					<td><input type='text' name='a3'/></td>
+				</tr>
+			</table>
+			<br/>
+			Verbes (présent indicatif 3e personne) : 
+			<br/>
+			<table>
+				<tr>
+					<td><input type='text' name='v1'/></td>
+					<td><input type='text' name='v2'/></td>
+					<td><input type='text' name='v3'/></td>
+				</tr>
+			</table>
+			<br/>
+		</form>
+		<h2 id='resultat1'>bla</h2>
+		<h3 id='resultat2'>bla</h3>
+		<h4 id='resultat3'>bla</h4>
+		<h5 id='resultat4'>bla</h5>
+		<h6 id='resultat5'>bla</h6>
+		</center>
+	</body>
+</html>
