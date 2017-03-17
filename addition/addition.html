@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf8"/>
+		<link rel="stylesheet" href="addition.css"/>
+		<title>Addition</title>
+		<script language="javascript">
+			function joli(boite, reste){
+				if(reste==0){
+					boite.value = ''
+				}else{
+					boite.value = reste
+				}
+			}
+
+			function addition(){
+				// Structure des cases : 
+				//
+				// r3 r2 r1 r0
+				//    a3 a2 a1 a0
+				//  + b3 b2 b1 b0
+				// t4 t3 t2 t1 t0 
+
+				for(var i=0;i<4;i++){
+					var a = parseInt(document.getElementById('a'+i).value) || 0;
+					var b = parseInt(document.getElementById('b'+i).value) || 0;
+					if(i==0){
+						document.getElementById('t'+i).value = (a+b)%10;
+						joli(document.getElementById('r'+i), Math.floor((a+b)/10));
+					}else{
+						var r = parseInt(document.getElementById('r'+(i-1)).value) || 0;
+						document.getElementById('t'+i).value = (a+b+r)%10;
+						joli(document.getElementById('r'+i), Math.floor((a+b+r)/10));
+					}
+				}
+				document.getElementById('t4').value = document.getElementById('r3').value;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Addition posée</h1>
+		<br/>
+		<br/>
+		<form>
+			<table>
+				<tr>
+					<td><input class="retenue" id="r3" type="text" size=1 disabled/></td>
+					<td><input class="retenue" id="r2" type="text" size=1 disabled/></td>
+					<td><input class="retenue" id="r1" type="text" size=1 disabled/></td>
+					<td><input class="retenue" id="r0" type="text" size=1 disabled/></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input id="a3" type="text" size=1 onchange="addition()"/></td>
+					<td><input id="a2" type="text" size=1 onchange="addition()"/></td>
+					<td><input id="a1" type="text" size=1 onchange="addition()"/></td>
+					<td><input id="a0" type="text" size=1 onchange="addition()"/></td>
+				</tr>
+				<tr>
+					<td class="ligne">+</td>
+					<td class="ligne"><input id="b3" type="text" size=1 onchange="addition()"/></td>
+					<td class="ligne"><input id="b2" type="text" size=1 onchange="addition()"/></td>
+					<td class="ligne"><input id="b1" type="text" size=1 onchange="addition()"/></td>
+					<td class="ligne"><input id="b0" type="text" size=1 onchange="addition()"/></td>
+				</tr>
+				<tr>
+					<td><input class="resultat" id="t4" type="text" size=1 disabled/></td>
+					<td><input class="resultat" id="t3" type="text" size=1 disabled/></td>
+					<td><input class="resultat" id="t2" type="text" size=1 disabled/></td>
+					<td><input class="resultat" id="t1" type="text" size=1 disabled/></td>
+					<td><input class="resultat" id="t0" type="text" size=1 disabled/></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+body{
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
+h1{
+	font-family: "Courier New";
+	font-style: normal;
+	font-weight: bold;
+}
+
+table{
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+	border-collapse: collapse;
+	padding: 15px;
+}
+
+td{
+	padding: 15px;
+}
+
+.ligne{
+	border-bottom: 1px solid white;
+}
+
+input[type=text]{
+	background-color: black;
+	color: white;
+	border: 1px solid white;
+	text-align: center;
+}
+
+input[type=text].retenue, input[type=text].resultat{
+	border: 0px;
+}
