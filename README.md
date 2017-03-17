@@ -7,4 +7,5 @@ L'idée est de mettre en commun des solutions correctes et expliquées pour perm
 
 **À voir :**
 1. Structure HTML
-2. Addition 
+2. Addition (addition.html ET addition.css)
+
