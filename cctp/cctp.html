@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Sushi</title>
+		<script type="text/javascript">4
+			function afficher(){
+				var maki = parseInt(document.commande.maki.value);
+				var futo = parseInt(document.commande.futo.value);
+				var cali = parseInt(document.commande.cali.value);
+				var nigi = parseInt(document.commande.nigi.value);
+
+				var rizCuit = 75*maki + 150*(futo+cali) + 30*nigi;
+
+				document.getElementById('rizCru').innerHTML = Math.round(6/13*rizCuit) + "g";
+				document.getElementById('poisson').innerHTML = 35*maki + 50*futo + 25*nigi + "g";
+				document.getElementById('eau').innerHTML = Math.round(7/13*rizCuit) + "mL";
+				document.getElementById('vinaigre').innerHTML = Math.round(125/1300*rizCuit) + "mL";
+				document.getElementById('sel').innerHTML = Math.floor(1/2500*rizCuit) + "c.c.";
+				document.getElementById('sucre').innerHTML = Math.round(55/1300*rizCuit) + "g";
+				document.getElementById('sesame').innerHTML = 6*cali + "c.c.";
+				document.getElementById('nori').innerHTML = (6*futo + 3*(maki + cali)) + " feuille(s)";
+				document.getElementById('surimi').innerHTML = 12*maki + " bâtonnet(s)";
+				document.getElementById('avocat').innerHTML = Math.floor(1/6*cali + 1) + "";
+
+			}
+		</script>
+	</head>
+	<body bgcolor=#ff6300>
+		<center>
+		<h1>La calculatrice à sushis</h1>
+		<table style="text-align: center">
+			<tr>
+				<td><img src="sushi-maki.jpg" height=20%></td>
+				<td><img src="nigiri-sushi.jpg" height=20%></td>
+			</tr>
+			<tr>
+				<td>Maki sushi (1 rouleau)</td>
+				<td>Nigiri sushi</td>
+			</tr>
+		</table>
+		</center>
+		<h2>Commande :</h2>
+		<form name="commande">
+			<table>
+				<tr>
+					<td>Maki sushi :</td>
+					<td><input type="text" name="maki" onchange="afficher()" value="0">rouleau(x)</td>
+				</tr>
+				<tr>
+					<td>Futo maki :</td>
+					<td><input type="text" name="futo" onchange="afficher()" value="0">rouleau(x)</td>
+				</tr>
+				<tr>
+					<td>California maki :</td>
+					<td><input type="text" name="cali" onchange="afficher()" value="0">rouleau(x)</td>
+				</tr>
+				<tr>
+					<td>Nigiri sushi :</td>
+					<td><input type="text" name="nigi" onchange="afficher()" value="0">paire(s)</td>
+				</tr>
+			</table>
+		</form>
+		<h2>Ingrédients : </h2>
+		<table width=100%>
+			<tr>
+				<td>Riz cru :</td><td id="rizCru"></td>
+				<td>Poisson :</td><td id="poisson"></td>
+			</tr>
+			<tr>
+				<td>Eau :</td><td id="eau"></td>
+				<td>Vinaigre :</td><td id="vinaigre"></td>
+			</tr>
+			<tr>
+				<td>Sel :</td><td id="sel"></td>
+				<td>Sucre :</td><td id="sucre"></td>
+			</tr>
+			<tr>
+				<td>Sésame :</td><td id="sesame"></td>
+				<td>Nori :</td><td id="nori"></td>
+			</tr>
+			<tr>
+				<td>Surimi :</td><td id="surimi"></td>
+				<td>Avocat :</td><td id="avocat"></td>
+			</tr>
+		</table>
+	</body>
+</html>
