@@ -1,0 +1,29 @@
+CC-TP Informatique L3 SEN
+Par Hector Lézin
+Le mardi 21 mars 2017
+Texte explicatif
+
+
+Tout d'abord, il s'agit de reproduire l'image donnée dans le sujet avec une 
+structure HTML cohérente.
+
+Je crée un formulaire contenant : 
+	- un bouton "engendrer calcul" qui, onClick, appellera la fonction qui 
+	affichera le calcul au bas de la page.
+	- quatre champs texte pour permettre à l'utilisateur de donner les 
+	nombres qu'il souhaite. On leur donne des id plutôt que des name pour 
+	pouvoir agir sur leur nom grâce à la méthode getElementById(). Ainsi on 
+	pourra appeler "nombre"+i où i est un nombre aléatoire entre 0 et 3.
+	- un sélecteur contenant deux options, simple et complexe. Je décide de 
+	lui donner un id plutôt qu'un name pour faire pareil que les champs texte.
+
+Au bas de la page je place une balise paragraphe vide dont on modifiera 
+l'attribut innerHTML pour y placer le calcul engendré.
+
+
+Intéressons nous maintenant au script : 
+cf commentaires dans le programme.
+
+Enfin, il reste quelques modifications à apporter au style de la page : 
+Je mets un fond gris comme sur l'image de l'énoncé, et je centre les éléments.
+Le calcul sera affiché en police Courier taille 40 points.

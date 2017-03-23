@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<!--
+	CC-TP Informatique L3 SEN
+	Par Hector Lézin
+	Le mardi 21 mars 2017
+	Code source
+-->
+
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<style type="text/css">
+			body{
+				background-color: #777777;
+				text-align: center;
+			}
+			p{
+				font-family: "Courier";
+				font-size: 40pt;
+			}
+		</style>
+		<script type="text/javascript">
+			//Le tableau des opérations dans lequel on peut choisir un élément 
+			//au hasard en choisissant simplement un indice au hasard.
+			//Pour un calcul simple on choisira un indice entre 0 et 1
+			//Pour un calcul complexe on choisira un indice entre 0 et 2
+			var operations = ["+","-","x"];
+
+			//La fonction principale du programme.
+			//Appelée par un clic sur le bouton "Engendrer calcul"
+			//Elle place un calcul généré aléatoirement à partir des nombres
+			//donnés par l'utilisateur et des opérations plus ou moins simples.
+			function engendrer(){
+				//On met dans calcul la valeur d'un des champs texte choisi 
+				//aléatoirement
+				var calcul = document.getElementById("nombre" + Math.floor(Math.random()*4)).value + " ";
+				//L'index choisi dans le sélecteur est soit 0 soit 1
+				//Or 0 vaut false et 1 vaut true
+				//On se sert de cette propriété pour déterminer facilement si 
+				//l'utilisateur veut un calcul simple ou complexe
+				if(document.getElementById("difficulte").selectedIndex){
+					calcul += operations[Math.floor(Math.random()*3)];
+				}else{
+					calcul += operations[Math.floor(Math.random()*2)];
+				}
+				//On ajoute un autre nombre aléatoire
+				calcul += " " + document.getElementById("nombre" + Math.floor(Math.random()*4)).value;
+
+				//Et enfin on place le calcul aléatoire dans le paragraphe de 
+				//bas de page.
+				document.getElementById("calcul").innerHTML = calcul;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Calcul mental v1</h1>
+		<form>
+			<input type="button" onclick="engendrer()" value="Engendrer calcul"/>
+			<br/>
+			<br/>
+			Nombres : 
+			<br/>
+			<input type="text" id="nombre0"/>
+			<input type="text" id="nombre1"/>
+			<input type="text" id="nombre2"/>
+			<input type="text" id="nombre3"/>
+			<br/>
+			<br/>
+			Opérations : 
+			<br/>
+			<select id="difficulte">
+				<option>Simple</option>
+				<option>Complexe</option>
+			</select>
+		</form>
+		<br/>
+		<p id="calcul"></p>
+	</body>
+</html>
