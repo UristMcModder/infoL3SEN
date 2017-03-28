@@ -4,15 +4,32 @@
 		<meta charset="utf-8"/>
 		<title>Devine Nombre</title>
 		<script language="javascript">
+			//On crée 2 variables globales : 
+			//Un compteur du nombre d'essais de l'utilisateur
 			var nombreEssais = 0;
+			//Le nombre aléatoire entre 0 et 100 à deviner
 			var nombreMystere = Math.floor(Math.random()*101);
+			//Explication de la formule : 
+			//Math.random() crée un réel dans l'intervalle [0,1[
+			//Multiplié par 101, ce réel passe dans l'intervalle [0,101[
+			//On fait la troncature de ce réel (cad on supprime tous les 
+			//nombres après la virgule) grâce à la fonction Math.floor()
+			
+			//Nouveau réinitialise les variables globales et le contenu du div
 			function nouveau(){
 				nombreEssais = 0;
 				nombreMystere = Math.floor(Math.random()*101);
 				document.getElementById("reponse").innerHTML = "Entrez un nombre entre 0 et 100";
 			}
+			
+			//Essayer vérifie si le nombre entré par l'utilisateur est plus ou
+			//moins grand que le (ou égal au) nombre mystère et modifie le
+			//contenu du div en conséquence
 			function essayer(){
+				//on fait un essai donc on l'augmente d'1
+				//(synonyme de nombreEssais = nombreEssais + 1)
 				nombreEssais ++;
+				//on utilise un parseInt pour pouvoir le comparer
 				var essai = parseInt(document.devine.nombre.value);
 				if(essai<nombreMystere){
 					document.getElementById("reponse").innerHTML = "C'est plus :/"
