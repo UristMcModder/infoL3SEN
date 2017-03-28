@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Devine Nombre</title>
+		<script language="javascript">
+			var nombreEssais = 0;
+			var nombreMystere = Math.floor(Math.random()*101);
+			function nouveau(){
+				nombreEssais = 0;
+				nombreMystere = Math.floor(Math.random()*101);
+				document.getElementById("reponse").innerHTML = "Entrez un nombre entre 0 et 100";
+			}
+			function essayer(){
+				nombreEssais ++;
+				var essai = parseInt(document.devine.nombre.value);
+				if(essai<nombreMystere){
+					document.getElementById("reponse").innerHTML = "C'est plus :/"
+				}
+				else if(essai==nombreMystere){
+					document.getElementById("reponse").innerHTML = "Trouvé en " + nombreEssais + " essais !"
+				}
+				else{
+					document.getElementById("reponse").innerHTML = "C'est moins :/"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Devine Nombre</h1>
+		<form name="devine">
+			<input type="reset" value="nouveau" onclick="nouveau()">
+			<br>
+			<br>
+			<input type="text" name="nombre">
+			<input type="button" onclick="essayer()" value="Essayer">
+		</form>
+		<br>
+		<div id="reponse">Entrez un nombre entre 0 et 100</div>
+	</body>
+</html>

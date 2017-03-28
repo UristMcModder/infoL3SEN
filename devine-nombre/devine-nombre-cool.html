@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Devine Nombre</title>
+		<script language="javascript">
+			var nombreEssais;
+			var nombreMystere;
+			function initialiser(){
+				nombreEssais = 0;
+				nombreMystere = Math.floor(Math.random()*101);
+				document.getElementById("leTd").innerHTML = "Entrez un nombre entre 0 et 100";
+				document.getElementById("leDiv").innerHTML = ""
+			}
+			function essayer(){
+				nombreEssais ++;
+				var essai = parseInt(document.devine.nombre.value);
+				if(essai<nombreMystere){
+					document.getElementById("leTd").innerHTML = "C'est plus :/";
+				}
+				else if(essai==nombreMystere){
+					document.getElementById("leTd").innerHTML = "Trouvé !";
+					document.getElementById("leDiv").innerHTML = "Nombre d'essais : " + nombreEssais + "<br/>" + "<input type='reset' value='Recommencer ?' onclick='initialiser()'/>";
+				}
+				else{
+					document.getElementById("leTd").innerHTML = "C'est moins :/";
+				}
+			}
+		</script>
+	</head>
+	<body onload="initialiser()">
+		<h1>Devine Nombre</h1>
+		<form name="devine">
+			<table>
+				<tr>
+					<td>
+						<input type="text" name="nombre"/>
+						<input type="button" value="Essai" onclick="essayer()"/>
+					</td>
+					<td id="leTd"></td>
+				</tr>
+			</table>
+			<div id="leDiv"></div>
+		</form>
+	</body>
+</html>
