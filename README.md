@@ -5,7 +5,17 @@ L'idée est de mettre en commun des solutions correctes et expliquées pour perm
 
 *TOUTE AIDE EST BIENVENUE*
 
-**À voir :**
+**À VOIR**
+_Commentés :_ 
 1. Structure HTML
 2. Addition (addition.html ET addition.css)
+3. Morpion
+4. Le CCTP du groupe B - cctp2
+5. Morpion
 
+_Non commentés :_
+6. Le CCTP blanc
+7. Le CC sur feuille
+8. Devine nombre (un td)
+9. Puissance 4
+10. Rectangles SVG
