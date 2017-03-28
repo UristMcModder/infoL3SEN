@@ -6,6 +6,7 @@ L'idée est de mettre en commun des solutions correctes et expliquées pour perm
 *TOUTE AIDE EST BIENVENUE*
 
 **À VOIR**
+
 _Commentés :_ 
 1. Structure HTML
 2. Addition (addition.html ET addition.css)
@@ -14,8 +15,8 @@ _Commentés :_
 5. Morpion
 
 _Non commentés :_
-6. Le CCTP blanc
-7. Le CC sur feuille
-8. Devine nombre (un td)
-9. Puissance 4
-10. Rectangles SVG
+1. Le CCTP blanc
+2. Le CC sur feuille
+3. Devine nombre (un td)
+4. Puissance 4
+5. Rectangles SVG
